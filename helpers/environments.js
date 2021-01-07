@@ -3,11 +3,13 @@ let environments = {};
 environments.staging = {
    port: 3000,
    envName: "staging",
+   secretKey: 'helloBD'
 };
 
 environments.production = {
    port: 5000,
    envName: "production",
+   secretKey: 'helloBD'
 };
 
 // determine which environment was passed
