@@ -5,27 +5,27 @@ const routes = require("../routes");
 const {
    notFoundHandler,
 } = require("../handlers/routeHandlers/notFoundHandler");
-const { parseJSON } = require("../helpers/utilities");
+const { parseJSON } = require("./utilities");
 
-// module scaffolding
+// scaffolding
 const handler = {};
 
-// handle request response
 handler.handleReqRes = (req, res) => {
    // request handling
-   const parsedURL = url.parse(req.url, true);
-   const path = parsedURL.pathname;
+   // get the url and parse it
+   const parsedUrl = url.parse(req.url, true);
+   const path = parsedUrl.pathname;
    const trimmedPath = path.replace(/^\/+|\/+$/g, "");
    const method = req.method.toLowerCase();
-   const queryStringObj = parsedURL.query;
+   const queryStringObject = parsedUrl.query;
    const headersObject = req.headers;
 
    const requestProperties = {
-      parsedURL,
+      parsedUrl,
       path,
       trimmedPath,
       method,
-      queryStringObj,
+      queryStringObject,
       headersObject,
    };
 
@@ -51,18 +51,12 @@ handler.handleReqRes = (req, res) => {
 
          const payloadString = JSON.stringify(payload);
 
-         res.setHeader("Content-Type", "application/json");
-
          // return the final response
+         res.setHeader("Content-Type", "application/json");
          res.writeHead(statusCode);
          res.end(payloadString);
       });
-
-      // response handle
-      // res.end("hello programmer!");
    });
-
-   // response handle
 };
 
 module.exports = handler;
