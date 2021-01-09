@@ -1,9 +1,15 @@
 // dependencies
 const http = require("http");
 const { handleReqRes } = require("./helpers/handleReqRes");
+const { sendTwilioSms } = require("./helpers/notifications");
 
 // scaffolding
 const app = {};
+
+// todo
+sendTwilioSms("01797989254", "Hello world", (err) => {
+   console.log(`this is the error`, err);
+});
 
 // configuration
 app.config = {
