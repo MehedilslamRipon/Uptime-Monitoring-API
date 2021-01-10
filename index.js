@@ -2,30 +2,21 @@
 const http = require("http");
 const { handleReqRes } = require("./helpers/handleReqRes");
 const { sendTwilioSms } = require("./helpers/notifications");
+const server = require("./lib/server");
+const worker = require("./lib/worker");
 
 // scaffolding
 const app = {};
 
-// todo
-sendTwilioSms("01797989254", "Hello world", (err) => {
-   console.log(`this is the error`, err);
-});
-
-// configuration
-app.config = {
-   port: 3000,
+app.init = () => {
+   // start the server
+   server.init();
+   
+   // start the worker
+   worker.init();
 };
 
-// create server
-app.createServer = () => {
-   const server = http.createServer(app.handleReqRes);
-   server.listen(app.config.port, () => {
-      console.log(`Server is running on PORT: ${app.config.port}`);
-   });
-};
+app.init();
 
-// handle Request Response
-app.handleReqRes = handleReqRes;
-
-// start the server
-app.createServer();
+// export
+module.exports = app;

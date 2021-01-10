@@ -128,7 +128,7 @@ handler._check.post = (requestProperties, callback) => {
                            } else {
                               callback(401, {
                                  error:
-                                    "Userhas already reached max check limit!",
+                                    "UserHash already reached max check limit!",
                               });
                            }
                         } else {
